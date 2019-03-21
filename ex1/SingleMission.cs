@@ -5,39 +5,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ex1
 {
     class SingleMission : IMission
     {
-        private string Name;
-        private string Type;
         private FunctionsContainer.func function;
 
-        string IMission.Name => throw new NotImplementedException();
+        public string Name
+        {
+            get;
+        }
 
-        string IMission.Type => throw new NotImplementedException();
-
+        public string Type
+        {
+            get;
+        }
+        
         public event EventHandler<double> OnCalculate;
 
         public SingleMission(FunctionsContainer.func action, string name)
         {
             function = action;
-            Type = "Single";
+            Type = Constants.TYPE_SINGLE;
             Name = name;
         }
 
         public double Calculate(double value)
         {
-            Console.WriteLine("starting...");
-            Thread.Sleep(2000);
-
-            if (OnCalculate != null)
-            {
-                double result = this.function(value);
-                OnCalculate(this, result);
-                return result;
-            }
-            return 0;
+            double result = function(value);
+            OnCalculate?.Invoke(this, result);
+            return result;
         }
     }
 }

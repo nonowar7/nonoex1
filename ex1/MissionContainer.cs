@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace ex1
 {
+    static class Constants
+    {
+        public const string TYPE_COMPOSED = "Composed";
+        public const string TYPE_SINGLE = "Single";
+    }
+
     class FunctionsContainer
     {
-
         public delegate double func(double value);
+
         private Dictionary<string, func> container;
 
         public FunctionsContainer()
@@ -28,15 +34,17 @@ namespace ex1
                         return container[s];
                     }
                 }
-                return null;
+                return Stam;
             }
             set
             {
-                if ( container[action] == null)
-                {
-                    Add(action);
-                }
+                container[action] = value;
             }
+        }
+
+        public double Stam(double value)
+        {
+            return value;
         }
 
         public List<string> getAllMissions()
@@ -48,44 +56,6 @@ namespace ex1
             }
             return missions;
         }
-
-        public void Add(string func)
-        {
-            this.container.Add(func, null);
-        }
-
-        public double Double(double value)
-        {
-            return value * 2;
-        }
-
-        public double Triple(double value)
-        {
-            return value * 3;
-        }
-
-        public double Square(double value)
-        {
-            return value * value;
-        }
-
-        public double Sqrt(double value)
-        {
-            if (value < 0)
-            {
-                Console.WriteLine("cannot square root a negative number");
-                return value;
-            }
-            return Math.Sqrt(value);
-        }
-
-        public double Plus2(double value)
-        {
-            return value + 2;
-        }
-
-
-
 
     }
 }

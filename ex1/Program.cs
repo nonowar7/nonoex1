@@ -36,7 +36,7 @@ namespace ex1
             funcList["Plus2"] = val => val + 2;                    // Double the Value
 
             PrintAvailableFunctions(funcList);
-
+            
             // This handler will output the screen every mission that was activated and it's value
             EventHandler<double> LogHandler = (sender, val) =>
             {
@@ -99,9 +99,12 @@ namespace ex1
             missionList.Add(mission5);
 
             RunMissions(missionList, 100);
+            
             RunMissions(missionList, 2);
 
             PrintAvailableFunctions(funcList);
+
+            while (true) { }
         }
     }
 }

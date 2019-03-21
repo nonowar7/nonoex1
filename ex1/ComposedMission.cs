@@ -8,44 +8,46 @@ namespace ex1
 {
     class ComposedMission : IMission
     {
-        private string Name;
-        private string Type;
         private List<FunctionsContainer.func> missions;
 
-        string IMission.Name => throw new NotImplementedException();
+        public string Name
+        {
+            get;
+        }
 
-        string IMission.Type => throw new NotImplementedException();
-
-        public delegate double func(double value);
+        public string Type
+        {
+            get;
+        }
 
         public event EventHandler<double> OnCalculate;
 
-        public ComposedMission(string name, List<FunctionsContainer.func> actions)
+        public ComposedMission(string name)
         {
-            missions = actions;
-            Type = "Composed";
             Name = name;
+            Type = Constants.TYPE_COMPOSED;
+            missions = new List<FunctionsContainer.func>();
         }
         
-        public void Add(FunctionsContainer.func f)
+        public ComposedMission Add(FunctionsContainer.func f)
         {
-            this.missions.Add(f);
+            missions.Add(f);
+            return this;
         }
 
         public double Calculate(double value)
         {
-            if (OnCalculate!= null)
+            double result = value;
+            foreach (FunctionsContainer.func f in missions)
             {
-                double result=0;
-                foreach ( FunctionsContainer.func f in missions)
-                {
-                    result += f(value);
-                    OnCalculate(this, result);
-                }
-                return result;
-
+                result = f(result);
             }
-            return 0;
+            OnCalculate?.Invoke(this, result);
+            return result;
+            
         }
     }
 }
+
+
+

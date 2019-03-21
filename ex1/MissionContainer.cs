@@ -50,6 +50,7 @@ namespace ex1
                         return container[s];
                     }
                 }
+                container[action] = Identity;
                 return Identity;
             }
             set

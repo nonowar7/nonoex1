@@ -20,11 +20,7 @@ namespace ex1
         public string Name {get;}
         public string Type {get;}        
 
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="action">a delegate</param>
-        /// <param name="name">mission's name</param>
+        // ctor
         public SingleMission(FunctionsContainer.func action, string name)
         {
             function = action;

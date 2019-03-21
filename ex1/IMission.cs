@@ -9,8 +9,6 @@ namespace ex1
     interface IMission
     {
 
-        // checking in
-
         event EventHandler<double> OnCalculate;  // An Event of when a mission is activated
 
         String Name { get; }
